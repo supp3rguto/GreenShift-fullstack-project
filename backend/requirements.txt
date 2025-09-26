@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+requests
+python-dotenv
+sqlalchemy
+pydantic[email]
+
+#.\venv\Scripts\activate
+#uvicorn app.main:app --reload
