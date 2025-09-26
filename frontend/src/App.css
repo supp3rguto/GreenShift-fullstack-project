@@ -15,7 +15,6 @@ body {
   color: var(--text-dark);
 }
 
-/* Estrutura Principal */
 .main-layout {
   display: flex;
   flex-direction: column;
@@ -31,7 +30,6 @@ main {
   box-sizing: border-box;
 }
 
-/* Header */
 .app-header {
   background-color: var(--background-white);
   padding: 1rem 2rem;
@@ -41,7 +39,6 @@ main {
   color: var(--primary-green);
 }
 
-/* Formulário da Calculadora */
 .hero-section {
   text-align: center;
   padding: 3rem 1rem;
@@ -124,7 +121,6 @@ main {
   background-color: #4a7d3e;
 }
 
-/* Resultados */
 .results-section {
   display: flex;
   gap: 2rem;
@@ -145,11 +141,16 @@ main {
   border-radius: 8px;
 }
 
-/* Footer */
 .app-footer {
   text-align: center;
   padding: 1.5rem;
   background-color: var(--text-dark);
   color: var(--background-white);
   font-size: 0.9rem;
+}
+
+.search-info {
+  padding: 10px 15px;
+  color: var(--gray-text);
+  font-style: italic;
 }

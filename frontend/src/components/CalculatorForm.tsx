@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { useDebounce } from '../hooks/useDebounce';
 
-// Tipagem para os dados que esperamos
 interface City {
   name: string;
   coordinates: [number, number];
 }
-
 interface SelectedCity {
   name: string;
   coords: [number, number];
 }
-
 interface CalculatorFormProps {
   onCalculate: (start: SelectedCity, end: SelectedCity) => void;
   setIsLoading: (isLoading: boolean) => void;
@@ -21,37 +19,77 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate, setIsLoadi
   const [originText, setOriginText] = useState('');
   const [destText, setDestText] = useState('');
   
+  const debouncedOriginTerm = useDebounce(originText, 400);
+  const debouncedDestTerm = useDebounce(destText, 400);
+
   const [originResults, setOriginResults] = useState<City[]>([]);
   const [destResults, setDestResults] = useState<City[]>([]);
-
   const [selectedOrigin, setSelectedOrigin] = useState<SelectedCity | null>(null);
   const [selectedDest, setSelectedDest] = useState<SelectedCity | null>(null);
 
-   const handleSearch = async (type: 'origin' | 'destination') => {
-    const query = type === 'origin' ? originText : destText;
-    const selected = type === 'origin' ? selectedOrigin : selectedDest;
+  const [isOriginSearching, setOriginSearching] = useState(false);
+  const [isDestSearching, setDestSearching] = useState(false);
 
-    if (selected && query === selected.name) {
-      return;
-    }
+  const originSearchRef = useRef<HTMLDivElement>(null);
+  const destSearchRef = useRef<HTMLDivElement>(null);
 
-    if (query.length < 3) {
-      if (type === 'origin') setOriginResults([]);
-      else setDestResults([]);
-      return;
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (originSearchRef.current && !originSearchRef.current.contains(event.target as Node)) {
+        setOriginResults([]);
+      }
+      if (destSearchRef.current && !destSearchRef.current.contains(event.target as Node)) {
+        setDestResults([]);
+      }
     };
 
-    try {
-      const response = await axios.get(`http://localhost:8000/search-city?q=${query}`);
-      if (type === 'origin') {
-        setOriginResults(response.data);
-      } else {
-        setDestResults(response.data);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []); 
+
+  useEffect(() => {
+    const search = async () => {
+      if (debouncedOriginTerm.length < 3 || (selectedOrigin && selectedOrigin.name === debouncedOriginTerm)) {
+        setOriginResults([]);
+        setOriginSearching(false);
+        return;
       }
-    } catch (error) {
-      console.error("Erro na busca de cidade:", error);
-    }
-  };
+      setOriginSearching(true);
+      try {
+        const response = await axios.get(`http://localhost:8000/search-city?q=${debouncedOriginTerm}`);
+        setOriginResults(response.data);
+      } catch (error) {
+        console.error("Erro na busca de cidade de origem:", error);
+      } finally {
+        setOriginSearching(false);
+      }
+    };
+    search();
+  }, [debouncedOriginTerm, selectedOrigin]);
+
+  useEffect(() => {
+    const search = async () => {
+      if (debouncedDestTerm.length < 3 || (selectedDest && selectedDest.name === debouncedDestTerm)) {
+        setDestResults([]);
+        setDestSearching(false);
+        return;
+      }
+      setDestSearching(true);
+      try {
+        const response = await axios.get(`http://localhost:8000/search-city?q=${debouncedDestTerm}`);
+        setDestResults(response.data);
+      } catch (error) {
+        console.error("Erro na busca de cidade de destino:", error);
+      } finally {
+        setDestSearching(false);
+      }
+    };
+    search();
+  }, [debouncedDestTerm, selectedDest]);
+
 
   const handleSelectCity = (type: 'origin' | 'destination', city: City) => {
     if (type === 'origin') {
@@ -78,7 +116,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate, setIsLoadi
       <p>Transforme dados logísticos em um ativo de sustentabilidade.</p>
       <div className="form-container">
         
-        <div className="search-input-wrapper">
+        <div className="search-input-wrapper" ref={originSearchRef}>
           <input
             type="text"
             className="search-input"
@@ -86,14 +124,15 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate, setIsLoadi
             value={originText}
             onChange={(e) => {
               setOriginText(e.target.value);
-              setSelectedOrigin(null); // Limpa seleção se o texto mudar
+              setSelectedOrigin(null);
             }}
-            onKeyUp={() => handleSearch('origin')}
           />
-          {originResults.length > 0 && (
+          {originText.length >= 3 && (
             <ul className="search-results">
+              {isOriginSearching && <li className="search-info">Carregando...</li>}
+              {!isOriginSearching && originResults.length === 0 && originText !== selectedOrigin?.name && <li className="search-info">Nenhuma cidade encontrada.</li>}
               {originResults.map((city, index) => (
-                <li key={index} onClick={() => handleSelectCity('origin', city)}>
+                <li key={index} onMouseDown={() => handleSelectCity('origin', city)}>
                   {city.name}
                 </li>
               ))}
@@ -101,7 +140,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate, setIsLoadi
           )}
         </div>
 
-        <div className="search-input-wrapper">
+        <div className="search-input-wrapper" ref={destSearchRef}>
           <input
             type="text"
             className="search-input"
@@ -111,12 +150,13 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate, setIsLoadi
               setDestText(e.target.value);
               setSelectedDest(null);
             }}
-            onKeyUp={() => handleSearch('destination')}
           />
-          {destResults.length > 0 && (
+          {destText.length >= 3 && (
             <ul className="search-results">
+              {isDestSearching && <li className="search-info">Carregando...</li>}
+              {!isDestSearching && destResults.length === 0 && destText !== selectedDest?.name && <li className="search-info">Nenhuma cidade encontrada.</li>}
               {destResults.map((city, index) => (
-                <li key={index} onClick={() => handleSelectCity('destination', city)}>
+                <li key={index} onMouseDown={() => handleSelectCity('destination', city)}>
                   {city.name}
                 </li>
               ))}

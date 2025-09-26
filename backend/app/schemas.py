@@ -4,7 +4,7 @@ import datetime
 
 class City(BaseModel):
     name: str
-    coordinates: Tuple[float, float] # (longitude, latitude)
+    coordinates: Tuple[float, float] #remember: longitude latitude
 
     class Config:
         from_attributes = True

@@ -5,5 +5,9 @@ python-dotenv
 sqlalchemy
 pydantic[email]
 
+
+#LEMBRETE PARA RODAR OS BAGULHO DO BACKEND
+#python -m venv .\venv
 #.\venv\Scripts\activate
+#pip install -r requirements.txt
 #uvicorn app.main:app --reload
