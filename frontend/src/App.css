@@ -1,0 +1,155 @@
+/* Paleta e Estilos Globais */
+:root {
+  --background-white: #FFFFFF;
+  --background-light-green: #F4F7F3;
+  --text-dark: #2E2D1D;
+  --primary-green: #5A8F4D;
+  --gray-text: #757575;
+  --border-color: #d1d1d1;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--background-light-green);
+  color: var(--text-dark);
+}
+
+/* Estrutura Principal */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Header */
+.app-header {
+  background-color: var(--background-white);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-green);
+}
+
+/* Formulário da Calculadora */
+.hero-section {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: var(--gray-text);
+  margin-bottom: 2rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.search-input-wrapper {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  background-color: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.search-results li {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.search-results li:hover {
+  background-color: var(--background-light-green);
+}
+
+.calculate-button {
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: var(--primary-green);
+  color: var(--background-white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.calculate-button:disabled {
+  background-color: var(--gray-text);
+  cursor: not-allowed;
+}
+
+.calculate-button:hover:not(:disabled) {
+  background-color: #4a7d3e;
+}
+
+/* Resultados */
+.results-section {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.map-container, .chart-container {
+  flex: 1;
+  background-color: var(--background-white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.leaflet-container {
+  height: 500px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--text-dark);
+  color: var(--background-white);
+  font-size: 0.9rem;
+}

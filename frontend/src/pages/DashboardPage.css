@@ -1,0 +1,47 @@
+.dashboard-container {
+  padding: 1rem;
+}
+
+.dashboard-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--gray-text);
+}
+
+.dashboard-message.error {
+  color: red;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.history-table th, .history-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.history-table thead th {
+  background-color: var(--background-light-green);
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.history-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.modal-cell {
+  font-weight: 600;
+}
