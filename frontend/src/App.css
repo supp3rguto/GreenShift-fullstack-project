@@ -1,4 +1,3 @@
-/* Paleta e Estilos Globais */
 :root {
   --background-white: #FFFFFF;
   --background-light-green: #F4F7F3;
@@ -15,7 +14,6 @@ body {
   color: var(--text-dark);
 }
 
-/* Estrutura Principal */
 .main-layout {
   display: flex;
   flex-direction: column;
@@ -30,7 +28,6 @@ main {
   box-sizing: border-box;
 }
 
-/* --- ESTILOS DO HEADER RESTAURADOS --- */
 .app-header {
   background-color: var(--background-white);
   padding: 1rem 2rem;
@@ -64,16 +61,13 @@ main {
   color: var(--primary-green);
   border-bottom-color: var(--primary-green);
 }
-/* --- FIM DOS ESTILOS DO HEADER --- */
 
 
-/* Formulário da Calculadora */
 .hero-section {
   text-align: center;
   padding: 3rem;
   margin-top: -3rem;
 }
-/* ... (outros estilos do formulário que já estavam corretos) ... */
 .hero-section h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
 .hero-section p { font-size: 1.2rem; color: var(--gray-text); margin-bottom: 2rem; }
 .form-container { display: flex; justify-content: center; align-items: flex-start; gap: 1rem; }
@@ -87,8 +81,6 @@ main {
 .calculate-button:disabled { background-color: var(--gray-text); cursor: not-allowed; }
 .calculate-button:hover:not(:disabled) { background-color: #4a7d3e; }
 
-
-/* Contêiner dos Resultados */
 .results-container {
   display: flex;
   gap: 2rem;
@@ -98,7 +90,7 @@ main {
 .card {
   flex: 1;
   background-color: var(--background-white);
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -112,13 +104,31 @@ main {
 .chart-wrapper { position: relative; width: 100%; flex-grow: 1; }
 
 
-/* --- ESTILOS DO FOOTER RESTAURADOS --- */
 .app-footer {
   text-align: center;
-  padding: 0.5rem;
   background-color: var(--text-dark);
-  color: var(--background-white);
+  color: #a0aec0; 
   font-size: 0.9rem;
-  margin-top: 2rem; /* Adiciona um espaço acima do rodapé */
+  margin-top: 2rem;
 }
-/* --- FIM DOS ESTILOS DO FOOTER --- */
+
+.footer-content p {
+  margin: 0.5rem 0;
+}
+
+.footer-credits {
+  font-size: 0.85rem;
+  color: #718096; 
+}
+
+.app-footer a {
+  color: #a0aec0; 
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.app-footer a:hover {
+  color: var(--background-white); 
+  text-decoration: underline;
+}

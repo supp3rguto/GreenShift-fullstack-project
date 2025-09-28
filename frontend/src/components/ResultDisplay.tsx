@@ -23,13 +23,13 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ routeData }) => {
   const leafletCoordinates: LatLngTuple[] = polyline.decode(route_geometry);
 
   const colorPalette = [
-    'rgba(162, 172, 130, 0.6)', // Verde Oliva Claro
-    'rgba(91, 109, 73, 0.6)',   // Verde Oliva Escuro
-    'rgba(139, 69, 19, 0.6)',   // Marrom (Etanol)
-    'rgba(75, 85, 99, 0.6)',    // Cinza Escuro (Gasolina)
-    'rgba(55, 65, 81, 0.6)',    // Cinza Mais Escuro (Diesel)
-    'rgba(30, 41, 59, 0.6)',    // Quase Preto (Caminhão)
-    'rgba(59, 130, 246, 0.6)',  // Azul (Elétrico)
+    'rgba(162, 172, 130, 0.6)',
+    'rgba(91, 109, 73, 0.6)', 
+    'rgba(139, 69, 19, 0.6)', 
+    'rgba(75, 85, 99, 0.6)',
+    'rgba(55, 65, 81, 0.6)',
+    'rgba(30, 41, 59, 0.6)',
+    'rgba(59, 130, 246, 0.6)', 
   ];
   const borderPalette = colorPalette.map(color => color.replace('0.6', '1'));
 

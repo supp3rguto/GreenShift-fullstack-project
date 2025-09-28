@@ -10,7 +10,6 @@ export function useDebounce<T>(value: T, delay: number): T {
       setDebouncedValue(value);
     }, delay);
 
-    // Se o usuário digitar de novo, o timer anterior é limpo e um novo é criado
     return () => {
       clearTimeout(handler);
     };

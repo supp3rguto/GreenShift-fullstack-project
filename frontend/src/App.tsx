@@ -21,7 +21,7 @@ function App() {
   const handleCalculate = async (origin: SelectedCity, destination: SelectedCity) => {
     setError(null);
     setRouteData(null);
-    setIsLoading(true); // Garantimos que o isLoading é ativado aqui
+    setIsLoading(true); 
     try {
       const response = await axios.post('http://localhost:8000/calculate-footprint', {
         start_coords: origin.coords,

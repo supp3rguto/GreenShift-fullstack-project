@@ -33,7 +33,6 @@
 
 .dashboard-message.error { color: red; }
 
-/* --- NOVOS ESTILOS PARA OS GRUPOS --- */
 .history-groups-container {
   display: grid;
   gap: 2rem;
@@ -44,7 +43,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   border: 1px solid var(--border-color);
-  overflow: hidden; /* Garante que a tabela não vaze as bordas */
+  overflow: hidden; 
 }
 
 .group-header {
@@ -66,20 +65,19 @@
   color: var(--gray-text);
 }
 
-/* --- ESTILOS DA TABELA (ligeiramente ajustados) --- */
 .history-table {
   width: 100%;
   border-collapse: collapse;
 }
 
 .history-table th, .history-table td {
-  padding: 12px 1.5rem; /* Padding horizontal alinhado com o header */
+  padding: 12px 1.5rem; 
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
 
 .history-table tbody tr:last-child td {
-  border-bottom: none; /* Remove a borda da última linha */
+  border-bottom: none; 
 }
 
 .history-table thead th {

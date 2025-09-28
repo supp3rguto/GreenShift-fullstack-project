@@ -60,7 +60,6 @@ const DashboardPage = () => {
           });
         });
         
-        // Convertemos o objeto de grupos em uma lista e atualizamos o estado
         setGroupedHistory(Object.values(groups));
         
       } catch (err) {
@@ -103,7 +102,6 @@ const DashboardPage = () => {
       {groupedHistory.length === 0 ? (
         <p className="dashboard-message">Nenhum cálculo foi realizado ainda.</p>
       ) : (
-        // A renderização agora itera sobre os grupos
         <div className="history-groups-container">
           {groupedHistory.map((group) => (
             <div key={group.groupKey} className="history-group-card">
