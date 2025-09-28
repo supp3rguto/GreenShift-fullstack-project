@@ -5,7 +5,7 @@
   --text-dark: #2E2D1D;
   --primary-green: #5A8F4D;
   --gray-text: #757575;
-  --border-color: #d1d1d1;
+  --border-color: #e2e8f0;
 }
 
 body {
@@ -15,6 +15,7 @@ body {
   color: var(--text-dark);
 }
 
+/* Estrutura Principal */
 .main-layout {
   display: flex;
   flex-direction: column;
@@ -23,134 +24,101 @@ body {
 
 main {
   flex-grow: 1;
-  padding: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
+/* --- ESTILOS DO HEADER RESTAURADOS --- */
 .app-header {
   background-color: var(--background-white);
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--primary-green);
 }
 
+.nav-link {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text-dark);
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--primary-green);
+}
+
+.nav-link.active {
+  color: var(--primary-green);
+  border-bottom-color: var(--primary-green);
+}
+/* --- FIM DOS ESTILOS DO HEADER --- */
+
+
+/* Formulário da Calculadora */
 .hero-section {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 3rem;
+  margin-top: -3rem;
 }
+/* ... (outros estilos do formulário que já estavam corretos) ... */
+.hero-section h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.hero-section p { font-size: 1.2rem; color: var(--gray-text); margin-bottom: 2rem; }
+.form-container { display: flex; justify-content: center; align-items: flex-start; gap: 1rem; }
+.search-input-wrapper { position: relative; width: 300px; }
+.search-input { width: 100%; padding: 15px; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 8px; box-sizing: border-box; }
+.search-results { list-style: none; padding: 0; margin: 0; position: absolute; background-color: var(--background-white); border: 1px solid var(--border-color); border-radius: 8px; width: 100%; max-height: 200px; overflow-y: auto; z-index: 1000; margin-top: 5px; text-align: left; }
+.search-results li { padding: 10px 15px; cursor: pointer; }
+.search-results li:hover { background-color: var(--background-light-green); }
+.search-info { padding: 10px 15px; color: var(--gray-text); font-style: italic; }
+.calculate-button { padding: 15px 30px; font-size: 1rem; font-weight: 700; background-color: var(--primary-green); color: var(--background-white); border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.2s; }
+.calculate-button:disabled { background-color: var(--gray-text); cursor: not-allowed; }
+.calculate-button:hover:not(:disabled) { background-color: #4a7d3e; }
 
-.hero-section h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
 
-.hero-section p {
-  font-size: 1.2rem;
-  color: var(--gray-text);
-  margin-bottom: 2rem;
-}
-
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.search-input-wrapper {
-  position: relative;
-  width: 300px;
-}
-
-.search-input {
-  width: 100%;
-  padding: 15px;
-  font-size: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-
-.search-results {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  background-color: var(--background-white);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-  margin-top: 5px;
-}
-
-.search-results li {
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.search-results li:hover {
-  background-color: var(--background-light-green);
-}
-
-.calculate-button {
-  padding: 15px 30px;
-  font-size: 1rem;
-  font-weight: 700;
-  background-color: var(--primary-green);
-  color: var(--background-white);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.calculate-button:disabled {
-  background-color: var(--gray-text);
-  cursor: not-allowed;
-}
-
-.calculate-button:hover:not(:disabled) {
-  background-color: #4a7d3e;
-}
-
-.results-section {
+/* Contêiner dos Resultados */
+.results-container {
   display: flex;
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: -2rem;
+  align-items: stretch;
 }
-
-.map-container, .chart-container {
+.card {
   flex: 1;
   background-color: var(--background-white);
   padding: 1.5rem;
   border-radius: 8px;
   border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
 }
+.map-card { min-height: 500px; }
+.leaflet-map-container { flex-grow: 1; border-radius: 8px; width: 100%; }
+.chart-card { display: flex; flex-direction: column; }
+.chart-card h3 { text-align: center; margin-bottom: 1rem; }
+.chart-wrapper { position: relative; width: 100%; flex-grow: 1; }
 
-.leaflet-container {
-  height: 500px;
-  width: 100%;
-  border-radius: 8px;
-}
 
+/* --- ESTILOS DO FOOTER RESTAURADOS --- */
 .app-footer {
   text-align: center;
-  padding: 1.5rem;
+  padding: 0.5rem;
   background-color: var(--text-dark);
   color: var(--background-white);
   font-size: 0.9rem;
+  margin-top: 2rem; /* Adiciona um espaço acima do rodapé */
 }
-
-.search-info {
-  padding: 10px 15px;
-  color: var(--gray-text);
-  font-style: italic;
-}
+/* --- FIM DOS ESTILOS DO FOOTER --- */

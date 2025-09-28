@@ -2,10 +2,28 @@
   padding: 1rem;
 }
 
-.dashboard-container h1 {
-  text-align: center;
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
 }
+
+.dashboard-header h1 { margin: 0; }
+
+.clear-history-button {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clear-history-button:hover { background-color: #c53030; }
 
 .dashboard-message {
   text-align: center;
@@ -13,29 +31,62 @@
   color: var(--gray-text);
 }
 
-.dashboard-message.error {
-  color: red;
+.dashboard-message.error { color: red; }
+
+/* --- NOVOS ESTILOS PARA OS GRUPOS --- */
+.history-groups-container {
+  display: grid;
+  gap: 2rem;
 }
 
+.history-group-card {
+  background-color: var(--background-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color);
+  overflow: hidden; /* Garante que a tabela não vaze as bordas */
+}
+
+.group-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #fcfcfc;
+}
+
+.group-header h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+}
+
+.group-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--gray-text);
+}
+
+/* --- ESTILOS DA TABELA (ligeiramente ajustados) --- */
 .history-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: var(--background-white);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .history-table th, .history-table td {
-  padding: 15px;
+  padding: 12px 1.5rem; /* Padding horizontal alinhado com o header */
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+}
+
+.history-table tbody tr:last-child td {
+  border-bottom: none; /* Remove a borda da última linha */
 }
 
 .history-table thead th {
   background-color: var(--background-light-green);
   font-weight: 700;
   color: var(--primary-green);
+  font-size: 0.9rem;
 }
 
 .history-table tbody tr:hover {

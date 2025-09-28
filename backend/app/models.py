@@ -9,8 +9,6 @@ class CalculationHistory(Base):
     origin_city = Column(String)
     destination_city = Column(String)
     distance_km = Column(Float)
-    
     modal = Column(String)
-
     carbon_footprint_kg = Column(Float)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
